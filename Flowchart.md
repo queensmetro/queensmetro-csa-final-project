@@ -89,3 +89,6 @@ Create a flowchart in Lucidchart that maps out the storyline, decision points, l
 
 Once your flowchart is approved or complete, you’ll use it as your guide to start coding your Java adventure game. Your flowchart should help you write cleaner, more organized logic using if/else, switch, loops, and methods.
 
+![image](https://github.com/user-attachments/assets/d87072f5-0ab7-4c1e-9934-a0526f42ddf2)
+
+
