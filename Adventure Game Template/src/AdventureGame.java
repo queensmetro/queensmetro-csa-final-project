@@ -1,4 +1,163 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 
+public class AdventureGame {
+    int lives = 3;
+    int points = 0;
+    ArrayList<String> inventory = new ArrayList<>();
+    Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        AdventureGame game = new AdventureGame();
+        game.intro();
+        new LevelOne(game).play();
+        new LevelTwo(game).play();
+        new LevelThree(game).play();
+        new LevelFour(game).play();
+        game.endGame();
+    }
+  public void intro() {
+        System.out.println("Welcome to Code Quest!\n");
+        System.out.println("You have 3 lives. Make good decisions to survive and earn points.\n");
+        asciiWelcome();
+        printStats();
+    }
+
+    public void endGame() {
+        System.out.println("\nGame Over!");
+        printStats();
+        System.out.println("Inventory Collected: " + inventory);
+        if (lives > 0) {
+            System.out.println("Well done, adventurer!");
+        } else {
+            System.out.println("You have perished on your quest.");
+        }
+    }
+
+    public void loadingAnimation(String message) {
+        System.out.print(message);
+        for (int i = 0; i < 3; i++) {
+            try {
+                Thread.sleep(500);
+                System.out.print(".");
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.println();
+    }
+
+    public void printStats() {
+        System.out.println("Lives: " + lives + " | Points: " + points);
+    }
+
+
+    // ASCII Art Methods
+public void asciiWelcome() {
+    System.out.println(
+            "************************************************************\n" +
+            "*                                                          *\n" +
+            "*   █████╗ ██████╗ ██╗   ██╗███████╗███╗   ██╗████████╗██╗   ██╗██████╗ ███████╗    *\n" +
+            "*  ██╔══██╗██╔══██╗██║   ██║██╔════╝████╗  ██║╚══██╔══╝██║   ██║██╔══██╗██╔════╝    *\n" +
+            "*  ███████║██║  ██║██║   ██║█████╗  ██╔██╗ ██║   ██║   ██║   ██║██████╔╝█████╗      *\n" +
+            "*  ██╔══██║██║  ██║╚██╗ ██╔╝██╔══╝  ██║╚██╗██║   ██║   ██║   ██║██╔══██╗██╔══╝      *\n" +
+            "*  ██║  ██║██████╔╝ ╚████╔╝ ███████╗██║ ╚████║   ██║   ╚██████╔╝██║  ██║███████╗    *\n" +
+            "*  ╚═╝  ╚═╝╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝    *\n" +
+            "*                                                                                    *\n" +
+            "****************************************************************************"
+    );
+}
+ public void asciiForest() {
+    System.out.println(
+            "****************************************************************************************\n" +
+            "*                                                                                      *\n" +
+            "*            ████                  ████         ███           ████      ████           *\n" +
+            "*           ██████                ██████       █████         ██████    ██████          *\n" +
+            "*          ████████              ████████     ███████       ████████  ████████         *\n" +
+            "*         ██████████            ██████████   █████████     ██████████████████          *\n" +
+            "*        ████████████          ████████████ ███████████   ████████████████             *\n" +
+            "*       ██████████████        ██████████████████████████ ██████████████                *\n" +
+            "*             ████                  ████         ████           ████                   *\n" +
+            "*             ████                  ████         ████           ████                   *\n" +
+            "*             ████                  ████         ████           ████                   *\n" +
+            "*             ████                  ████         ████           ████                   *\n" +
+            "*             ████                  ████         ████           ████                   *\n" +
+            "*       ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   *\n" +
+            "*      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   *\n" +
+            "*                                                                                      *\n" +
+            "****************************************************************************************"
+    );
+}
+    public void asciiBridge() {
+       System.out.println(
+            "****************************************************************************************\n" +
+            "*                                                                                      *\n" +
+            "*                                                                                      *\n" +
+            "*         ██████                                                      ██████           *\n" +
+            "*        ████████                                                    ████████          *\n" +
+            "*       ██████████                                                  ██████████         *\n" +
+            "*      ████████████                                                ████████████        *\n" +
+            "*     ██████████████                                              ██████████████       *\n" +
+            "*    ████████████████                                            ████████████████      *\n" +
+            "*   ██████████████████                                          ██████████████████     *\n" +
+            "*  ████████████████████                                        ████████████████████    *\n" +
+            "*  ████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████████████████    *\n" +
+            "*  ████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████████████████    *\n" +
+            "*  ████████          □         □         □         □         □         ████████████    *\n" +
+            "*  ████████          |         |         |         |         |         ████████████    *\n" +
+            "*  ▓▓▓▓▓▓▓▓          □         □         □         □         □         ▓▓▓▓▓▓▓▓▓▓▓▓    *\n" +
+            "*  ▓▓▓▓▓▓▓▓                                                             ▓▓▓▓▓▓▓▓▓▓▓▓    *\n" +
+            "*  ▓▓▓▓▓▓▓▓                                                             ▓▓▓▓▓▓▓▓▓▓▓▓    *\n" +
+            "*  ▓▓▓▓▓▓▓▓▓▓▓▓    ▒▒▒▒    ▓▓▓▓▓▓▓▓▓▓▓▓    ▒▒▒▒    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    *\n" +
+            "*  ▓▓▓▓▓▓▓▓▓▓▓▓    ▒▒▒▒    ▓▓▓▓▓▓▓▓▓▓▓▓    ▒▒▒▒    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓    *\n" +
+            "*                                                                                      *\n" +
+            "****************************************************************************************"
+    );
+    }
+
+    public void asciiDragon() {
+      System.out.println(
+    "************************************************************\n" +
+    "*                                                          *\n" +
+    "*                   ______________                         *\n" +
+    "*        ,===:'.,            `-._                          *\n" +
+    "*             `:.`---.__         `-._                      *\n" +
+    "*               `:.     `--.         `.                    *\n" +
+    "*                 \\.        `.         `.                  *\n" +
+    "*         (,,(,    \\.         `.   ____,-`.,               *\n" +
+    "*      (,'     `/   \\.   ,--.___`.'                        *\n" +
+    "*  ,  ,'  ,--.  `,   \\.;'         `                        *\n" +
+    "*   `{D, {    \\  :    \\;                                   *\n" +
+    "*     V,,'    /  /    //                                   *\n" +
+    "*     j;;    /  ,' ,-//.    ,---.      ,                   *\n" +
+    "*     \\;'   /  ,' /  _  \\  /  _  \\   ,'/                 *\n" +
+    "*           \\   `'  / \\  `'  / \\  `.' /                  *\n" +
+    "*            `.___,'   `.__,'   `.__,'                    *\n" +
+    "*                                                          *\n" +
+    "************************************************************");
+}}
+
+
+class LevelOne extends AdventureGame {
+    AdventureGame game;
+    LevelOne(AdventureGame game) {
+        this.game = game;
+    }
+    public void play() {
+        System.out.println("Level 1: The Mysterious Forest");
+        game.asciiForest();
+        System.out.println("You encounter a fork in the road. Left or right? (left/right)");
+        String choice = game.scanner.nextLine();
+        if (choice.equalsIgnoreCase("left")) {
+            System.out.println("You found a hidden treasure! +10 points and a magic leaf");
+            game.points += 10;
+            game.inventory.add("Magic Leaf");
+        } else {
+            System.out.println("You fell into a trap. -1 life");
+            game.lives--;
+        }
+    }
+}
 
 
 class LevelTwo extends AdventureGame {
